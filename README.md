@@ -4,8 +4,8 @@
 ## 2. Installation and usage
 On your cmd:  
 1. Git clone https://github.com/emsiqh/food-delivery-app
-2. cd mu-membership  
+2. cd food-delivery-app  
 3. npm i  
 4. npm start (to start the localhost and see the site)
-## 3. Tech
+## 3. Tech stack
 - ReactJS (18), HTML, CSS, JavaScript, React Redux Reducer, React Router v6, Tailwind Css, Firebase Storage. 
