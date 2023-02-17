@@ -55,6 +55,11 @@ module.exports = {
         cartItem: "#2e3033",
         cartTotal: "#343739",
         footerBg: "rgb(255, 255, 224)",
+        btnColor: "#4caf50",
+        cancelBtnColor: "#f44336",
+      },
+      boxShadow: {
+        lgShadow: '0 2px 5px #ccc',
       },
     },
   },

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
+import { MdShoppingBasket, MdAdd, MdLogout, MdLogin } from "react-icons/md";
 import { motion } from "framer-motion";
-
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { app } from "../firebase.config";
 
+import { app } from "../firebase.config";
 import Logo from "../img/logo.png";
 import Avatar from "../img/avatar.png";
-import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { headerLinks } from "../utils/constants";
 
 const Header = () => {
+  const linkStyle = "px-4 py-2 flex justify-center items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base";
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
 
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
 
@@ -30,6 +31,7 @@ const Header = () => {
         user: providerData[0],
       });
       localStorage.setItem("user", JSON.stringify(providerData[0]));
+      sessionStorage.setItem("user", JSON.stringify(providerData[0]));
     } else {
       setIsMenu(!isMenu);
     }
@@ -43,10 +45,12 @@ const Header = () => {
     });
     setIsMenu(false);
     localStorage.clear();
+    sessionStorage.clear();
     dispatch({
       type: actionType.SET_USER,
       user: null,
     });
+    navigate("/login");
   };
 
   const showCart = () => {
@@ -100,10 +104,12 @@ const Header = () => {
           <div className="relative">
             <motion.img
               whileTap={{ scale: 0.6 }}
-              src={user ? user.photoURL : Avatar}
+              src={
+                user && user.photoURL ? user.photoURL : Avatar
+              }
               className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
               alt="userprofile"
-              onClick={login}
+              onClick={() => setIsMenu(!isMenu)}
             />
             {isMenu && (
               <motion.div
@@ -115,7 +121,7 @@ const Header = () => {
                 {user && user.email === "emsiqh2k1@gmail.com" && (
                   <Link to={"/createItem"}>
                     <p
-                      className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      className={`${linkStyle}`}
                       onClick={() => setIsMenu(false)}
                     >
                       New Item <MdAdd />
@@ -123,12 +129,23 @@ const Header = () => {
                   </Link>
                 )}
 
-                <p
-                  className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
-                  onClick={logout}
-                >
-                  Logout <MdLogout />
-                </p>
+                {user ? (
+                  <p
+                    className={`${linkStyle}`}
+                    onClick={logout}
+                  >
+                    Logout <MdLogout />
+                  </p>
+                ) : (
+                  <Link to={"/login"}>
+                    <p
+                      className={`${linkStyle}`}
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Login <MdLogin />
+                    </p>
+                  </Link>
+                )}
               </motion.div>
             )}
           </div>
