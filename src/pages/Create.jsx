@@ -29,8 +29,9 @@ const CreatePage = () => {
     if (authToken) {
         userEmail = JSON.parse(authToken).email;
     }
+    console.log(authToken, userEmail);
     useEffect(() => {
-        if (userEmail !== "emsiqh2k1@gmail.com" || authToken !== null) {
+        if (userEmail !== "emsiqh2k1@gmail.com" || authToken === null) {
             navigate("/")
         }
     }, [])
