@@ -70,7 +70,7 @@ const RegisterPage = () => {
 
     return (
 
-        <div className="w-[300px] mb-[100px] mx-auto bg-white rounded p-5 shadow-lgShadow">
+        <div className="w-full md:w-[300px] mb-[100px] mx-auto bg-white rounded p-5 shadow-lgShadow">
             <p className="text-center mb-5 text-4xl">Register</p>
             <form action="" onSubmit={(e) => handleSubmit(e)}>
                 <div className="p-4">
@@ -107,7 +107,7 @@ const RegisterPage = () => {
                     <button className="bg-btnColor text-white py-[14px] px-5 my-2 border-none rounded cursor-pointer w-full" type="submit">Register</button>
                 </div>
                 <div className="p-4 bg-[#f1f1f1] text-center">
-                    <span className="pt-4">Already have an account?<Link to={"/login"} className="underline">Sign in</Link></span>
+                    <span className="pt-4">Already have an account? <Link to={"/login"} className="underline">Sign in</Link></span>
                 </div>
             </form>
         </div>

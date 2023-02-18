@@ -63,7 +63,7 @@ const LoginPage = () => {
     };
     return (
 
-        <div className="w-[300px] mb-[100px] mx-auto bg-white rounded p-5 shadow-lgShadow">
+        <div className="w-full md:w-[300px] mb-[100px] mx-auto bg-white rounded p-5 shadow-lgShadow">
             <p className="text-center mb-5 text-4xl">Login</p>
             <form action="" onSubmit={handleLogin}>
                 <div className="flex justify-center mt-6 mb-3">
