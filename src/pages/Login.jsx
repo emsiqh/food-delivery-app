@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { MdArrowRight } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,15 @@ const LoginPage = () => {
     const provider = new GoogleAuthProvider();
     const [{ user }, dispatch] = useStateValue();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let authToken = sessionStorage.getItem("user");
+        console.log(authToken);
+        if (authToken) {
+            navigate('/')
+        }
+    }, [])
+
 
     const loginWithGoogle = async () => {
         const {
