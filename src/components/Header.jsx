@@ -13,6 +13,7 @@ import { headerLinks } from "../utils/constants";
 
 const Header = () => {
   const linkStyle = "px-4 py-2 flex justify-center items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base";
+  const mobileButtonStyle = "m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base";
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
@@ -179,7 +180,7 @@ const Header = () => {
             src={user && user.photoURL ? user.photoURL : Avatar}
             className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
             alt="userprofile"
-            onClick={login}
+            onClick={() => setIsMenu(!isMenu)}
           />
           {isMenu && (
             <motion.div
@@ -212,12 +213,27 @@ const Header = () => {
                 }
               </ul>
 
-              <p
-                className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base"
-                onClick={logout}
-              >
-                Logout <MdLogout />
-              </p>
+              {
+                user ? (
+                  <p
+                    className={`${mobileButtonStyle}`}
+                    onClick={logout}
+                  >
+                    Logout <MdLogout />
+                  </p>
+                ) : (
+                  <Link to={"/login"}>
+                    <p
+                      className={`${mobileButtonStyle}`}
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Login <MdLogin />
+                    </p>
+                  </Link>
+                )
+              }
+
+
             </motion.div>
           )}
         </div>
